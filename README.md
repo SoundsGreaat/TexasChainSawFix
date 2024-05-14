@@ -2,7 +2,7 @@
 ![img](256x256.ico "Bubba is coming for you")
 ## Works only for Microsoft Store version of the game.
 ## Download
-[**TexasChainSawFix.exe**](https://github.com/SoundsGreaat/TexasChainSawFix/releases/download/v1.0.1/TexasChainSawFix.exe) or check the [**releases**](https://github.com/SoundsGreaat/TexasChainSawFix/releases) page.
+[**TexasChainSawFix.exe**](https://github.com/SoundsGreaat/TexasChainSawFix/releases/download/v1.1.0/TexasChainSawFix.exe) or check the [**releases**](https://github.com/SoundsGreaat/TexasChainSawFix/releases) page.
 
 ## How to use
 1. Download the fix.
@@ -12,7 +12,6 @@
 
 ## Troubleshooting
 - If the fix doesn't work, try running it as an administrator.
-- If you specified the wrong disk, delete the `config.json` file and restart the fix.
 
 ## How it works
 The game crashes when the explorer.exe process is running. This fix will kill the explorer.exe process when you run the game and restart it when you exit the game.

@@ -1,28 +1,23 @@
-import json
 import os
 import subprocess
-
 import keyboard
-
-CONFIG_FILE = 'config.json'
-
-
-def choose_disk():
-    if not os.path.exists(CONFIG_FILE):
-        disk = input('Enter disk letter: ')
-        disk = disk[0]
-        with open(CONFIG_FILE, 'w') as f:
-            json.dump({'disk': disk}, f)
-    else:
-        with open(CONFIG_FILE) as f:
-            disk = json.load(f)['disk']
-    return disk
+from colorama import Fore, Style
 
 
-def find_directory(name, path):
-    for root, dirs, files in os.walk(path):
-        if name in dirs:
-            return os.path.join(root, name)
+def find_and_launch_game(game_name):
+    try:
+        powershell_command = f'Get-AppxPackage *{game_name}* | Select-Object -ExpandProperty InstallLocation'
+        result = subprocess.run(["powershell", "-Command", powershell_command], capture_output=True, text=True)
+
+        if result.stdout:
+            install_location = result.stdout.strip() + r'\start_protected_game.exe'
+            print(f'Game found at: {install_location}')
+            subprocess.Popen(f'explorer "{install_location}"')
+            print(f'{Fore.GREEN}Game launched{Style.RESET_ALL}')
+        else:
+            print(f'{Fore.RED}Game not found{Style.RESET_ALL}')
+    except Exception as e:
+        print(f'{Fore.RED}Error{Style.RESET_ALL}: {e}')
 
 
 def kill_explorer():
@@ -34,13 +29,9 @@ def run_explorer():
 
 
 def main():
-    print(f'Game found at: {dir_path}')
-    exe_path = dir_path + r'\Content\start_protected_game.exe'
-    print(f'Game path: {exe_path}')
-    print('\nPress "Caps Lock" to kill explorer.exe.')
-    print('Press "Alt + Home" to run explorer.exe.')
-
-    subprocess.run(exe_path)
+    find_and_launch_game('GunMedia.TheTexasChainSawMassacre-PCEdition')
+    print(f'\nPress {Fore.BLUE}"Caps Lock"{Style.RESET_ALL} to kill explorer.exe')
+    print(f'Press {Fore.BLUE}"Alt + Home"{Style.RESET_ALL} to run explorer.exe')
 
     keyboard.add_hotkey('caps lock', kill_explorer)
     keyboard.add_hotkey('alt+home', run_explorer)
@@ -48,8 +39,4 @@ def main():
 
 
 if __name__ == '__main__':
-    dir_path = find_directory('The Texas Chain Saw Massacre - PC Edition', f'{choose_disk()}:\\')
-    if dir_path:
-        main()
-    else:
-        print('Game not found.')
+    main()
