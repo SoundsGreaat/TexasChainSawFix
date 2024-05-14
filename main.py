@@ -1,7 +1,22 @@
+import json
 import os
 import subprocess
 
 import keyboard
+
+CONFIG_FILE = 'config.json'
+
+
+def choose_disk():
+    if not os.path.exists(CONFIG_FILE):
+        disk = input('Enter disk letter: ')
+        disk = disk[0]
+        with open(CONFIG_FILE, 'w') as f:
+            json.dump({'disk': disk}, f)
+    else:
+        with open(CONFIG_FILE) as f:
+            disk = json.load(f)['disk']
+    return disk
 
 
 def find_directory(name, path):
@@ -33,7 +48,7 @@ def main():
 
 
 if __name__ == '__main__':
-    dir_path = find_directory('The Texas Chain Saw Massacre - PC Edition', 'D:\\')
+    dir_path = find_directory('The Texas Chain Saw Massacre - PC Edition', f'{choose_disk()}:\\')
     if dir_path:
         main()
     else:
