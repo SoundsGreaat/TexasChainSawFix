@@ -2,7 +2,7 @@
 ![img](256x256.ico "Bubba is coming for you")
 ## Works only for Microsoft Store version of the game.
 ## Download
-[**TexasChainSawFix.exe**](https://github.com/SoundsGreaat/TexasChainSawFix/releases/download/v1.1.0/TexasChainSawFix.exe) or check the [**releases**](https://github.com/SoundsGreaat/TexasChainSawFix/releases) page.
+[**TexasChainSawFix.exe**](https://github.com/SoundsGreaat/TexasChainSawFix/releases/download/v1.2.0/TexasChainSawFix.exe) or check the [**releases**](https://github.com/SoundsGreaat/TexasChainSawFix/releases) page.
 
 ## How to use
 1. Download the fix.
