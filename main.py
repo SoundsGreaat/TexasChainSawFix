@@ -34,9 +34,10 @@ def check_process(process_name):
 def check_process_loop(process_name):
     while True:
         if not check_process(process_name):
-            run_explorer()
             print(f'{Fore.RED}Game closed{Style.RESET_ALL}')
-            break
+            run_explorer()
+            sleep(3)
+            raise SystemExit(0)
         sleep(1)
 
 
@@ -47,7 +48,7 @@ def kill_explorer():
 
 
 def run_explorer():
-    subprocess.run('chcp 65001 && explorer.exe', shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    subprocess.Popen(r'explorer')
     print(f'{Fore.GREEN}Explorer.exe started{Style.RESET_ALL}')
 
 
@@ -70,7 +71,6 @@ def main():
 
     keyboard.add_hotkey('caps lock', kill_explorer)
     keyboard.add_hotkey('alt+home', run_explorer)
-    keyboard.wait('ctrl+shift+q')
 
 
 if __name__ == '__main__':
